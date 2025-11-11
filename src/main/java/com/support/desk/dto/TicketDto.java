@@ -5,6 +5,7 @@ import com.support.desk.model.User;
 import lombok.Data;
 
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import com.support.desk.model.TicketComment;
 
@@ -17,8 +18,8 @@ public class TicketDto {
 	    private Long ticketId;
 	    private String title;
 	    private String description;
-	    private String creationTime;
-	    private String resolutionTime;
+	    private LocalDateTime creationTime;
+	    private LocalDateTime resolutionTime;
 	    private TicketStatus status;
 	    private User assignedAgent;
 	    private List<TicketComment>comments=new ArrayList<>();
