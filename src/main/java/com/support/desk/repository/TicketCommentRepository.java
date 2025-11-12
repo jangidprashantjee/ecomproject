@@ -12,5 +12,5 @@ import com.support.desk.model.TicketComment;
 public interface TicketCommentRepository extends JpaRepository<TicketComment, Long> {
 
 	
-	List<TicketComment> findByTicketOrderByCreatedAtAsc0(Ticket ticket);
+	List<TicketComment> findByTicketOrderByCreatedAtAsc(Ticket ticket);
 }

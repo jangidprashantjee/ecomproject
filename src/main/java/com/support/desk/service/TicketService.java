@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.support.desk.dto.TicketCommentDto;
 import com.support.desk.dto.TicketDetailsUpdatedDto;
 import com.support.desk.dto.TicketDto;
 import com.support.desk.model.Ticket;
@@ -148,5 +149,17 @@ public class TicketService {
 	   public Long getTotalActiveTicketCount() {
 		   Integer size = ticketRepository.findByStatus(TicketStatus.OPEN).size();
 		   return size.longValue();
+	   }
+	   
+	   //get comments for a ticket
+	   
+	   @Transactional
+	   public List<TicketCommentDto> getCommentsByTicketId(Long ticketId){
+		   Ticket ticket = ticketRepository.findByTicketId(ticketId);
+		   List<TicketComment> comments = ticketCommentRepository.findByTicketOrderByCreatedAtAsc(ticket);
+		   List<TicketCommentDto> commentDtos = comments.stream()
+				   .map(comment -> modelMapper.map(comment, TicketCommentDto.class))
+				   .toList();
+		   return commentDtos;
 	   }
 }
